@@ -1,0 +1,10 @@
+snippet yaml
+	---
+	title: ${1:title}
+	filename: ${2:`Filename('', 'no filename found')`}
+	date: ${3:`strftime("%Y-%m-%d")`}
+	author: ${4:`g:snips_author`}
+	description: |
+		${5:description}
+	---
+
