@@ -1,10 +1,12 @@
+extends markdown
+
 snippet yaml
 	---
 	title: ${1:title}
-	filename: ${2:`Filename('', 'no filename found')`}
-	date: ${3:`strftime("%Y-%m-%d")`}
+	date: ${3:`system("date")`}
 	author: ${4:`g:snips_author`}
 	description: |
-		${5:description}
+	    ${5:description}
+	draft: true
 	---
 
