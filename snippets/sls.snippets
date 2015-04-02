@@ -1,4 +1,29 @@
+extends jinja2
+snippet if
+	{% if ${1} %}
+	${0:${VISUAL}}
+	{% endif %}
+snippet ifg
+	{% if grains['${1}'] == '${2:True}' %}
+	${0:${VISUAL}}
+	{% endif %}
 snippet os
-	{% if grains['os'] == '${1:FreeBSD}'%}
-	${0}
-	{% endif %}	
+	{% if grains['os'] == '${1:FreeBSD}' %}
+	${0:${VISUAL}}
+	{% endif %}
+snippet ifp
+	{% if salt['pillar.get']('${1}') == '${2:True}' %}
+	${0:${VISUAL}}
+	{% endif %}
+snippet ifin
+	{% if '${1}' in pillar %}
+	${0:${VISUAL}}
+	{% endif %}
+snippet ifd
+	{% if ${1} is defined %}
+	${0:${VISUAL}}
+	{% endif %}
+snippet el
+	{% else %}
+snippet en
+	{% endif %}

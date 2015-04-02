@@ -1,4 +1,16 @@
 ## Main
+snippet header
+	/*-----------------------------------------------------------------------------
+	 *
+	 * `Filename('', "My C Project")`
+	 * ${1:Description}
+	 * 
+	 * Author: `g:snips_author`
+	 * Date Created: `strftime("%Y-%m-%d")`
+	 *
+	 *-----------------------------------------------------------------------------*/
+
+	${0}
 # main
 snippet main
 	int main(int argc, const char *argv[]) {
@@ -11,6 +23,14 @@ snippet mainn
 		${0}
 		return EXIT_SUCCESS;
 	}
+# Common libs
+snippet libs
+	#include <stdlib.h>
+	#include <stdio.h>
+	#include <math.h>
+	#include <errno.h>
+	#include <stdbool.h>
+	#include <ctype.h>
 ##
 ## Preprocessor
 # #include <...>
