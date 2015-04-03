@@ -25,12 +25,14 @@ snippet mainn
 	}
 # Common libs
 snippet libs
-	#include <stdlib.h>
-	#include <stdio.h>
-	#include <math.h>
-	#include <errno.h>
-	#include <stdbool.h>
 	#include <ctype.h>
+	#include <errno.h>
+	#include <limits.h>
+	#include <math.h>
+	#include <stdbool.h>
+	#include <stdio.h>
+	#include <stdlib.h>
+	#include <string.h>
 ##
 ## Preprocessor
 # #include <...>
@@ -228,6 +230,54 @@ snippet getopt
 			${0}
 		}
 	}
+# Files
+snippet f
+	FILE* ${1:fp};    /* Opening ${2:path/to/file.txt} */
+	char* ${1}_name = "${2}";
+
+	${1} = fopen(${1}_name, "${3:r}" );
+	if (${1} == NULL) {
+		fprintf(stderr, "couldn't open file '%s'; %s\n",
+				${1}_name, strerror(errno));
+		exit (EXIT_FAILURE);
+	}
+
+	${0};
+
+	if( fclose(${1}) == EOF ) {    /* Closing ${2} */
+		fprintf ( stderr, "couldn't close file '%s'; %s\n",
+				${1}_name, strerror(errno));
+		exit (EXIT_FAILURE);
+	}
+snippet ma
+	${1:ptr} = malloc(${2:sizeof(${3:type}}));
+	if(${1} == NULL) {
+		fprintf ( stderr, "\ndynamic memory allocation failed\n" );
+		exit (EXIT_FAILURE);
+	}
+
+	${0};
+
+	free(${1});
+	${1} = NULL;
+# calloc
+snippet ca
+	${1:ptr} = calloc((size_t)(${2:number}), sizeof(${3:char}) );
+	if(${1} == NULL ) {
+		fprintf(stderr, "\ndynamic memory allocation failed\n" );
+		exit(EXIT_FAILURE);
+	}
+
+	${0};
+
+	free(${1});
+	${1} = NULL;
+snippet rea
+	${1:ptr} = realloc(${1}, ${2:sizeof(${3:char}}));
+	if(|POINTER|==NULL) {
+		fprintf ( stderr, "\ndynamic memory reallocation failed\n" );
+		exit (EXIT_FAILURE);
+	}
 ##
 ## Miscellaneous
 # This is kind of convenient
@@ -250,6 +300,35 @@ snippet gpl
 	 * along with this program; if not, see <http://www.gnu.org/licenses/>.
 	 *
 	 * Copyright (C) ${1:Author}, `strftime("%Y")`
+	 */
+
+	${0}
+snippet bsd
+	/*
+	 *  Redistribution and use in source and binary forms, with or without
+	 *  modification, are permitted provided that the following conditions are met:
+	 *  1. Redistributions of source code must retain the above copyright
+	 *  notice, this list of conditions and the following disclaimer.
+	 *  2. Redistributions in binary form must reproduce the above copyright
+	 *  notice, this list of conditions and the following disclaimer in the
+	 *  documentation and/or other materials provided with the distribution.
+	 *  3. Neither the name of the ${3:organization} nor the
+	 *  names of its contributors may be used to endorse or promote products
+	 *  derived from this software without specific prior written permission.
+	 *  
+	 *  THIS SOFTWARE IS PROVIDED BY ${2:`g:snips_author`} ''AS IS'' AND ANY
+	 *  EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+	 *  WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+	 *  DISCLAIMED. IN NO EVENT SHALL $2 BE LIABLE FOR ANY
+	 *  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+	 *  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+	 *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+	 *  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+	 *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+	 *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+	 *  
+	 *  Copyright (C) `strftime("%Y")` ${2}
+	 *  All rights reserved.
 	 */
 
 	${0}
