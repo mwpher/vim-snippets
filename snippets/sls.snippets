@@ -23,7 +23,12 @@ snippet ifd
 	{% if ${1} is defined %}
 	${0:${VISUAL}}
 	{% endif %}
+snippet p
+	{{ salt['pillar.get']('${1}'${2:, '${3}'}) }}
+snippet g
+	{{ salt['grains.get']('${1}'${2:, '${3}') }}
 snippet el
 	{% else %}
+	${0}
 snippet en
 	{% endif %}
